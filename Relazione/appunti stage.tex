@@ -6,6 +6,7 @@
 \author{Riccardo Cambianica}   
 \begin{document}
     \maketitle
+    \section*{}
     Ho trovato una repository su GitHub, sviluppata da un team dell'azienda olandese Philips,
     che contiene una applicazione android sviluppata in Kotlin che simula la comunicazione di osservazioni tra
     alcuni PHD virtuali ed un gateway (un cellulare android).
@@ -13,5 +14,24 @@
     astratto (\textbf{IEEE 1073/10206 - ACOM}).
     Ho quindi provveduto a convertire alcune delle classi del progetto nel linguaggio di programmazione
     \textbf{Java}, per poi studarne il contenuto, al fine di avere un punto di partenza per lo sviluppo del prototipo
-    dello stage.    
+    dello stage.
+    \section{Studio delle classi tradotte (package generichealthservice)}
+        \subsection{BluetoothValueFormatType}
+            Enumerazione formata da una serie di costanti in formato esadecimale (?), che vengono contenuti poi
+            dalla variabile value, infine ci sono due metodi get e set.
+        \subsection{TLValue}
+            TLV è l'acronimo di Type-Length-Value, un formato di codifica usato per strutturare e trasmettere dati, solitamente in binario,
+            poiché rende il parsing più semplice e i dati prodotti più piccoli.
+            Due variabili, una di tipo ObservationType ed una di tipo Object.
+            \newline
+            I metodi sono:         
+            \begin{itemize}
+                \item asGHSBytes: utilizza un oggetto della classe BluetoothBytesParser per incapsulare i dati in byte secondo il formato TLV, richiamando il resto dei metodi della classe
+                \item valueByteArray: analizza la variabile value e in base al suo valore richiama uno dei metodi di conversione da tipi primitivi a byte array
+                \item formatType: restituisce il tipo di formato necessario in base al tipo di valore; attenzione a non confondere la variable type con il tipo di variabile che contiene value
+                \item intToByteArray: usato da valueByteArray per convertire int in byte array
+                \item floatToByteArray: usato da valueByteArray per convertire float in byte array 
+            \end{itemize}
+    \section{UnitCode}
+            Enumerazione che contiene tutti i codici dei dispositivi medici, composti da valore, simbolo e descrizione
 \end{document}
