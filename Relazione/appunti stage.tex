@@ -6,16 +6,77 @@
 \author{Riccardo Cambianica}   
 \begin{document}
     \maketitle
-    \section*{}
-    Ho trovato una repository su GitHub, sviluppata da un team dell'azienda olandese Philips,
-    che contiene una applicazione android sviluppata in Kotlin che simula la comunicazione di osservazioni tra
-    alcuni PHD virtuali ed un gateway (un cellulare android).
-    E' inerente al mio ambito di progetto, poiché sviluppa nella pratica uno standard IEEE 
-    astratto (\textbf{IEEE 1073/10206 - ACOM}).
-    Ho quindi provveduto a convertire alcune delle classi del progetto nel linguaggio di programmazione
-    \textbf{Java}, per poi studarne il contenuto, al fine di avere un punto di partenza per lo sviluppo del prototipo
-    dello stage.
+    \tableofcontents
+    \newpage
+    \section{Appunti vari}
+        Ho trovato una repository su GitHub, sviluppata da un team dell'azienda olandese Philips,
+        che contiene una applicazione android sviluppata in Kotlin che simula la comunicazione di osservazioni tra
+        alcuni PHD virtuali ed un gateway (un cellulare android).
+        E' inerente al mio ambito di progetto, poiché sviluppa nella pratica uno standard IEEE 
+        astratto (\textbf{IEEE 1073/10206 - ACOM}).
+        Ho quindi provveduto a convertire alcune delle classi del progetto nel linguaggio di programmazione
+        \textbf{Java}, per poi studarne il contenuto, al fine di avere un punto di partenza per lo sviluppo del prototipo
+        dello stage.     
     \section{Studio delle classi tradotte (package generichealthservice)}
+        \subsection{Observation e classi connesse}
+        \subsubsection{Observation}
+            La classe base per le osservazioni in ACOM.
+            Le variabili presenti sono:
+            \begin{itemize}
+                \item patientId, una variabile intera che serve a tenere traccia nell'osservazione a quale paziente si riferisce
+                \item supplementalInfo, una lista di tipo ObservationType
+                \item isCurrentTimeline, un booleano utile per il timestamp dell'osservazione
+            \end{itemize}
+            I metodi presenti sono:
+            \begin{itemize}
+                \item i get per le variabili: getId, getType, getTimestamp, getValue e getUnitCode (capire perché ritorna sempre la costante UNKNOWN, c'è un TODO)
+                \item i "convertitori" da informazioni normali a byte array delle variabili 
+                (ghsByteArray, patientIdByteArray, timestampByteArray, flagsByteArray, supplimentalInfoByteArray e getClassByte) 
+            \end{itemize}
+            E' presente anche un'enumerazione interna, ObservationClass, che associa ad ogni tipo di osservazione presenti nello standard ACOM.
+        \subsubsection{ObservationType}
+            Enumerazione che contiene tutte le costanti relative al tipo medico di osservazione; a livello concettuale è importante distinguere i tipi di osservazioni con le classi di osservazioni.
+        \subsubsection{ObservationValueType}
+            Enumerazione che contiene 11 costanti con valori in byte che possono essere associati al ObservationType; è presente anche una classe ObservationTypeExtensions
+            che sembra associare i valori delle costanti.
+        \subsubsection{SimpleNumericObservation}
+            Una delle classi che estendono Observation; contiene le variabili 
+            \begin{itemize}
+                \item id, tipo short
+                \item type, tipo ObservationType
+                \item value, tipo float (siamo nel caso di un'osservazione numerica)
+                \item valuePrecision, tipo int
+                \item UnitCode, tipo Unitcode, devo capire in pratica a cosa serve
+                \item timestamp, tipo date
+            \end{itemize}
+            I metodi presenti sono i get delle variabili, getValueByteArray che traduce il valore dell'osservazione in byte array ed infine
+            ObservationClass che ritorna la classe a cui l'osservazione appartiene (capire perché è necessario, invece di utilizzare il valore per distinguere i diversi tipi
+            di osservazioni, probabilmente a causa del formato in byte non è fattibile).
+        \subsubsection{SimpleStringObservation}
+            Osservazioni riportate in un formato leggibile.
+            Uniche differenze con SimpleNumericObservation sono: value è ovviamente di tipo String, non è presente la variabile di tipo UnitCode.
+        \subsubsection{SimpleDiscreteObservation}
+            Osservazione di un o piu eventi "discreti" nel mondo reale dello stato "discreto" di un oggetto.
+            Uguale a SimpleStringObservation, unica differenza il tipo della variabile value, in questo caso di tipo int.
+            Nel progetto sembra non essere mai usata, probabilmente è presente per completezza rispetto al modello ACOM.
+        \subsubsection{SampleArrayObservations}
+            La classe contiene attributi (in particolare l'array di byte e altri float) che consentono la rappresentazione di grafici (tipo elettrocardiogramma credo)
+            Oltre ai soliti metodi get, implementa i set per le variabili, permettendo quindi il controllo totale dei grafici che rappresenta.
+        \subsubsection{CompoundNumericObservation}
+            In ACOM, un'osservazione compound è usata per modellare osservazioni dove una singola misurazione può non essere sufficiente per
+            descrivere totalmente l'osservazione.
+            Nel progetto sono presenti due classi che implementano questa specifica.
+            Come il nome suggerisce, la classe CompoundNumericObservation si occupa di numeri, quindi contiene al suo interno una specifica variabile value, di tipo SimpleNumericValue
+            che potrebbe essere vista come un array di valori numerici.
+        \subsubsection{BundledObservation}
+            Come si può intuire dal nome, questa classe modella un insieme di osservazioni, contenute nella lista value.
+            Resta da capire la sua utilità a livello pratico nel progetto, dato che non è presente nella specifica ACOM.
+            \subsection{SimpleNumericValue}
+            Creata per l'utilizzo in CompoundNumericObservation, modella un valore numerico. Non capisco perché al suo interno è presente
+            una variabile di tipo ObservationType, poiché già presente in CompoundNumericObservation. 
+        \subsection{CompoundDiscreetEventObservation}
+            Contiene una lista di ObservationEvent di nome value, i quali modellano degli eventi che possono verificarsi durante
+            la rilevazione delle osservazioni, ad esempio malfunzionamenti o disconnessioni del GHS.
         \subsection{BluetoothValueFormatType}
             Enumerazione formata da una serie di costanti in formato esadecimale (?), che vengono contenuti poi
             dalla variabile value, infine ci sono due metodi get e set.
@@ -32,6 +93,16 @@
                 \item intToByteArray: usato da valueByteArray per convertire int in byte array
                 \item floatToByteArray: usato da valueByteArray per convertire float in byte array 
             \end{itemize}
-    \section{UnitCode}
+        \subsection{TLVObservation}
+            Estende TLValue
+        \subsection{UnitCode}
             Enumerazione che contiene tutti i codici dei dispositivi medici, composti da valore, simbolo e descrizione
+    \section{Considerazioni sull'analisi delle classi}
+        \begin{itemize}
+            \item Non confondere ObservationType con ObservationClass
+            \item Un evento non è un'osservazione
+            \item Devo ancora capire con certezza l'utilizzo effettivo della classe UnitCode
+            \item Le classi che implementano il formato TLV sono utilizzate esclusivamente per descivere il dosaggio di medicinali, perciò non sono sicuro che siano utili per il progetto di stage
+            \item 
+        \end{itemize}
 \end{document}
