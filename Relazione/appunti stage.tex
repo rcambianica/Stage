@@ -71,7 +71,7 @@
         \subsubsection{BundledObservation}
             Come si può intuire dal nome, questa classe modella un insieme di osservazioni, contenute nella lista value.
             Resta da capire la sua utilità a livello pratico nel progetto, dato che non è presente nella specifica ACOM.
-            \subsection{SimpleNumericValue}
+        \subsection{SimpleNumericValue}
             Creata per l'utilizzo in CompoundNumericObservation, modella un valore numerico. Non capisco perché al suo interno è presente
             una variabile di tipo ObservationType, poiché già presente in CompoundNumericObservation. 
         \subsection{CompoundDiscreetEventObservation}
@@ -105,4 +105,7 @@
             \item Le classi che implementano il formato TLV sono utilizzate esclusivamente per descivere il dosaggio di medicinali, perciò non sono sicuro che siano utili per il progetto di stage
         \end{itemize}
         Altre considerazioni sono sparse nelle descrizioni delle singole classi.
+        Riguardo la costruzione di un convertitore da ACOM a FHIR, devo chiarire se è necessario passare dalle classi Java
+        del progetto analizzato. Perché l'abbiamo preso in esame? Proponeva un'implementazione di un formato astratto di rappresentazione 
+        dei dati che i PHD possono generare. Ma ora il problema è che la conversione è in sostanza un semplice mapping tra gli attributi dei due formati
 \end{document}
