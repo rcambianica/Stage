@@ -10,6 +10,15 @@ public class TemperatureObservation extends NumericObservation{
 
     protected ObservationsType temperatureType;
 
+    public TemperatureObservation() {
+        this.observationType = ObservationsType.TEMPERATURE;
+        this.timestamp = new Date();
+        this.temperatureType = ObservationsType.MDC_TEMP_BODY;
+        this.value = 36.5f;
+        this.unit = UnitCode.MDC_DIM_DEGC;
+        this.accuracy = 0.1f;
+    }
+
     public TemperatureObservation(float value, ObservationsType temperatureType, UnitCode unit, float accuracy) {
         this.observationType = ObservationsType.TEMPERATURE;
         this.timestamp = new Date();

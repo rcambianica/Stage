@@ -18,7 +18,10 @@ public class Main {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-
+        /*leggo i file di osservazioni (per ora solo quello delle osservazioni di temperatura)
+         * salvando le singole osservazioni in un array di appoggio, poi utilizzerò un arraylist
+         * per aggiungere eventuali osservazioni
+        */
         JsonReader reader = new JsonReader(new FileReader(Costants.TEMPERATURE_OBS_FILE));
         Observation[] observations = new Gson().fromJson(reader, TemperatureObservation[].class);
         List<Observation> oList = new ArrayList<>();
@@ -167,14 +170,14 @@ public class Main {
             }
 
             case 6: {
-                //obs = new
+                
                 break;
             }
 
             default:
+                obs = new TemperatureObservation();
                 break;
         }
-        //System.out.println(obs.toString());
         return obs;
     }
 }

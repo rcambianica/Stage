@@ -4,7 +4,7 @@ import java.util.Date;
 
 import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
 
-public class Observation {
+public abstract class Observation {
 
     private final int patientId = 1234;
     protected ObservationsType observationType;
