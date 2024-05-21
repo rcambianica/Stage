@@ -10,14 +10,10 @@ public abstract class Observation {
     protected ObservationsType observationType;
     protected Date timestamp;
 
-    
-    
-
     public int getPatientId() {
         return patientId;
     }
 
-    
     public ObservationsType getObservationType() {
         return observationType;
     }

@@ -8,3 +8,5 @@
 *.pdf
 *.pptx
 *.toc
+observations.json
+temperature_obs.json

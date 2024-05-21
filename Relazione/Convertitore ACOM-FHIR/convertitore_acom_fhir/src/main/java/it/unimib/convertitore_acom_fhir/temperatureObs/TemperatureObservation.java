@@ -6,7 +6,7 @@ import it.unimib.convertitore_acom_fhir.Util.UnitCode;
 
 import java.util.Date;
 
-public class TemperatureObservation extends NumericObservation{
+public class TemperatureObservation extends NumericObservation {
 
     protected ObservationsType temperatureType;
 

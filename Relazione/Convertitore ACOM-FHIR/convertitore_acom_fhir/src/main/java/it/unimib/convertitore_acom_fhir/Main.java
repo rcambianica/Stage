@@ -13,15 +13,19 @@ import com.google.gson.stream.JsonReader;
 
 import it.unimib.convertitore_acom_fhir.Util.*;
 import it.unimib.convertitore_acom_fhir.temperatureObs.TemperatureObservation;
+
 public class Main {
 
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        /*leggo i file di osservazioni (per ora solo quello delle osservazioni di temperatura)
-         * salvando le singole osservazioni in un array di appoggio, poi utilizzerò un arraylist
+        /*
+         * leggo i file di osservazioni (per ora solo quello delle osservazioni di
+         * temperatura)
+         * salvando le singole osservazioni in un array di appoggio, poi utilizzerò un
+         * arraylist
          * per aggiungere eventuali osservazioni
-        */
+         */
         JsonReader reader = new JsonReader(new FileReader(Costants.TEMPERATURE_OBS_FILE));
         Observation[] observations = new Gson().fromJson(reader, TemperatureObservation[].class);
         List<Observation> oList = new ArrayList<>();
@@ -30,8 +34,8 @@ public class Main {
         }
 
         int scelta = -1;
-       
-        while(scelta != 7)    {
+
+        while (scelta != 7) {
             System.out.println("- GENERATORE DI OSSERVAZIONI ACOM (IEEE 11073-10206) -");
             System.out.println("Selezionare il tipo di osservazioni che si vuole generare:");
             System.out.println("1 - Temperature Observations (IEEE 11073-10408)");
@@ -42,21 +46,22 @@ public class Main {
             System.out.println("6 - Basic ECG or Heart Rate Observations (IEEE 11073-10406)");
             System.out.println("7 - uscita");
             scelta = input.nextInt();
-            if(scelta != 7)
+            if (scelta != 7)
                 oList.add(generateObservation(scelta));
         }
 
-        //sovrascrivo il file json solo se ho effettivamente generato nuove osservazioni
-        if(observations.length != oList.size()) {
+        // sovrascrivo il file json solo se ho effettivamente generato nuove
+        // osservazioni
+        if (observations.length != oList.size()) {
             Gson gson = new Gson();
             String json = gson.toJson(oList);
-            System.out.println("JSON" + json);
+            //System.out.println("JSON" + json);
             PrintWriter outputFile = null;
             try {
-                outputFile = new PrintWriter("observations.json");
+                outputFile = new PrintWriter(Costants.TEMPERATURE_OBS_FILE);
                 outputFile.println(json);
             } catch (FileNotFoundException e) {
-                System.out.println("Errore nell'apertura del file observations.json");
+                System.out.println("Errore nell'apertura del file temperature_obs.json");
                 System.exit(0);
             }
             outputFile.close();
@@ -66,9 +71,9 @@ public class Main {
         input.close();
     }
 
-    private static Observation generateObservation(int obsType)  {
+    private static Observation generateObservation(int obsType) {
         Observation obs = new Observation() {
-            
+
         };
         switch (obsType) {
             case 1: {
@@ -80,10 +85,10 @@ public class Main {
                 System.out.println("Tipo di temperatura:");
                 int cont = 1;
                 for (ObservationsType observationsType : ObservationsType.values()) {
-                    if(observationsType.name().contains("_TEMP_")){
+                    if (observationsType.name().contains("_TEMP_")) {
                         System.out.println(cont + " - " + observationsType.name());
                         cont++;
-                    }    
+                    }
                 }
                 scelta = input.nextInt();
                 switch (scelta) {
@@ -135,42 +140,41 @@ public class Main {
                     case 2:
                         unit = UnitCode.MDC_DIM_FAHR;
                         break;
-                    case 3: 
-                        unit  = UnitCode.MDC_DIM_KELVIN;
+                    case 3:
+                        unit = UnitCode.MDC_DIM_KELVIN;
                         break;
                     default:
                         unit = UnitCode.MDC_DIM_DEGC;
                         break;
                 }
-                
+
                 obs = new TemperatureObservation(temperatura, oType, unit, 0.1f);
                 System.out.println(obs);
                 break;
             }
-                
+
             case 2: {
 
                 break;
             }
 
-            
             case 3: {
-                
+
                 break;
             }
 
             case 4: {
-                
+
                 break;
             }
 
             case 5: {
-                
+
                 break;
             }
 
             case 6: {
-                
+
                 break;
             }
 

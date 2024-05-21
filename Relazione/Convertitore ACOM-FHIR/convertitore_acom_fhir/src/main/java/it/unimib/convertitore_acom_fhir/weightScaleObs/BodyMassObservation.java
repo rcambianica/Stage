@@ -6,7 +6,7 @@ import it.unimib.convertitore_acom_fhir.Util.UnitCode;
 
 public class BodyMassObservation extends NumericObservation{
     
-    /*TODO capire se e a cosa serve, è presente nella tabella del PDF*/ 
+    //TODO capire se e a cosa serve, è presente nella tabella del PDF 
     //private int id;
 
     public BodyMassObservation(int id, float value, UnitCode unitCode)    {
