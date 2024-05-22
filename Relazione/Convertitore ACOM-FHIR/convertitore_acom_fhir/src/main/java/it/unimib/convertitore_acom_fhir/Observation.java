@@ -1,27 +1,75 @@
 package it.unimib.convertitore_acom_fhir;
 
+//import java.time.Duration;
 import java.util.Date;
 
+import it.unimib.convertitore_acom_fhir.Util.ObservationStatusCode;
 import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
 import it.unimib.convertitore_acom_fhir.Util.SupplementalInfo;
 
 public class Observation {
 
+    private String id;
+    private ObservationsType derivedFrom[];
+    private ObservationsType hasMember[];
+    // private Duration measurementDuration;
+    private ObservationStatusCode measurementStatus;
     private final int patientId = 1234;
-    private ObservationsType type;
+    private SupplementalInfo supplementalInfo[];
     private Date timestamp;
-    private SupplementalInfo supplementalInfo [];
+    private ObservationsType type;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ObservationsType[] getDerivedFrom() {
+        return derivedFrom;
+    }
+
+    public void setDerivedFrom(ObservationsType[] derivedFrom) {
+        this.derivedFrom = derivedFrom;
+    }
+
+    public ObservationsType[] getHasMember() {
+        return hasMember;
+    }
+
+    public void setHasMember(ObservationsType[] hasMember) {
+        this.hasMember = hasMember;
+    }
+
+    /*
+     * public Duration getMeasurementDuration() {
+     * return measurementDuration;
+     * }
+     * 
+     * public void setMeasurementDuration(Duration measurementDuration) {
+     * this.measurementDuration = measurementDuration;
+     * }
+     */
+    public ObservationStatusCode getMeasurementStatus() {
+        return measurementStatus;
+    }
+
+    public void setMeasurementStatus(ObservationStatusCode measurementStatus) {
+        this.measurementStatus = measurementStatus;
+    }
 
     public int getPatientId() {
         return patientId;
     }
 
-    public ObservationsType getType() {
-        return type;
+    public SupplementalInfo[] getSupplementalInfo() {
+        return supplementalInfo;
     }
 
-    public void setType(ObservationsType type) {
-        this.type = type;
+    public void setSupplementalInfo(SupplementalInfo[] supplementalInfo) {
+        this.supplementalInfo = supplementalInfo;
     }
 
     public Date getTimestamp() {
@@ -32,11 +80,12 @@ public class Observation {
         this.timestamp = timestamp;
     }
 
-    public SupplementalInfo[] getSupplementalInfo() {
-        return supplementalInfo;
+    public ObservationsType getType() {
+        return type;
     }
 
-    public void setSupplementalInfo(SupplementalInfo supplementalInfo []) {
-        this.supplementalInfo = supplementalInfo;
+    public void setType(ObservationsType type) {
+        this.type = type;
     }
+
 }

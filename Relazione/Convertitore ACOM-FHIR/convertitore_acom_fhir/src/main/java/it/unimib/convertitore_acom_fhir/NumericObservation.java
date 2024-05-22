@@ -1,5 +1,7 @@
 package it.unimib.convertitore_acom_fhir;
 
+import java.util.UUID;
+
 import it.unimib.convertitore_acom_fhir.Util.*;
 
 public class NumericObservation extends Observation {
@@ -27,6 +29,7 @@ public class NumericObservation extends Observation {
         this.unit = unit;
     }
     public NumericObservation (float value, UnitCode unit, ObservationsType type)  {
+        setId(UUID.randomUUID().toString());
         this.value = value;
         this.unit = unit;
         setType(type);

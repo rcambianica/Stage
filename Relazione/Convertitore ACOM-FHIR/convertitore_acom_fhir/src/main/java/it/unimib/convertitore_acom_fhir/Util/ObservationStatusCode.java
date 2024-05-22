@@ -1,0 +1,16 @@
+package it.unimib.convertitore_acom_fhir.Util;
+
+public enum ObservationStatusCode {
+    INVALID,
+    QUESTIONABLE,
+    NOT_AVAILABLE,
+    CALIBRATION_ONGOING,
+    TEST_DATA,
+    EARLY_INDICATION,
+    CALCULATION,
+    MSMT_ONGOING,
+    MSMT_VALUE_EXCEEDED_BOUNDARIES,
+    MSMT_STATE_ANN_INHIBITED,
+    SETTING,
+    MANUALLY_ENTERED
+}

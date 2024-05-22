@@ -1,1 +1,32 @@
-[{"patientId":1234,"type":"MDC_TEMP_BODY","timestamp":"May 14, 2024, 8:50:01 PM"},{"patientId":1234,"type":"MDC_TEMP_BODY","timestamp":"May 15, 2024, 9:31:15 AM"},{"patientId":1234,"type":"MDC_TEMP_RECT","timestamp":"May 15, 2024, 9:32:20 AM"},{"patientId":1234,"type":"MDC_TEMP_BODY","timestamp":"May 15, 2024, 9:32:21 AM"},{"patientId":1234,"type":"MDC_TEMP_EAR","timestamp":"May 21, 2024, 9:34:27 AM"},{"patientId":1234,"type":"MDC_TEMP_ORAL","timestamp":"May 22, 2024, 11:28:36 AM"},{"patientId":1234,"type":"MDC_PRESS_BLD_NON_INV","timestamp":"May 22, 2024, 1:52:16 PM","supplementalInfo":["MDC_UPEXT_FOREARM"]},{"patientId":1234,"type":"MDC_PRESS_BLD_NON_INV","timestamp":"May 22, 2024, 1:53:52 PM","supplementalInfo":["MDC_UPEXT_FOREARM"]},{"patientId":1234,"type":"MDC_TEMP_FINGER","timestamp":"May 22, 2024, 3:50:04 PM"},{"accuracy":0.1,"value":45.0,"unit":"MDC_DIM_KELVIN","patientId":1234,"type":"MDC_TEMP_TYMP","timestamp":"May 22, 2024, 3:55:33 PM"}]
+[
+    {
+        "id": "81647717-b535-48e4-8019-595ab5c4041e",
+        "patientId": 1234,
+        "timestamp": "May 22, 2024, 5:41:09 PM",
+        "type": "MDC_TEMP_EAR"
+    },
+    {
+        "id": "4ab2704a-0aee-4d44-953e-92e1686b3e81",
+        "patientId": 1234,
+        "supplementalInfo": [
+            "MDC_UPEXT_FOREARM"
+        ],
+        "timestamp": "May 22, 2024, 5:42:39 PM",
+        "type": "MDC_PRESS_BLD_NON_INV"
+    },
+    {
+        "id": "b78d5913-6d81-4649-a11d-da9cd59ce59e",
+        "patientId": 1234,
+        "timestamp": "May 22, 2024, 5:42:46 PM",
+        "type": "MDC_PULS_RATE_NON_INV"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 40.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "0532335e-935f-4309-a7fd-499284b875ae",
+        "patientId": 1234,
+        "timestamp": "May 22, 2024, 5:43:33 PM",
+        "type": "MDC_TEMP_TYMP"
+    }
+]

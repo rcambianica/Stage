@@ -11,9 +11,10 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.bloodPressureObs.BPPulseRateObservation;
+import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.bloodPressureObs.BloodPressureObservation;
+import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.temperatureObs.TemperatureObservation;
 import it.unimib.convertitore_acom_fhir.Util.*;
-import it.unimib.convertitore_acom_fhir.bloodPressureObs.BloodPressureObservation;
-import it.unimib.convertitore_acom_fhir.temperatureObs.TemperatureObservation;
 
 public class Main {
 
@@ -165,6 +166,13 @@ public class Main {
                     case 1:
                         obs = new BloodPressureObservation();
                         break;
+                    case 2: {
+                        System.out.print("Numero di pulsazioni al minuto: ");
+                        float value = input.nextFloat();
+                        obs = new BPPulseRateObservation(value);
+                        break;
+                    }
+                        
 
                     default:
                         break;
