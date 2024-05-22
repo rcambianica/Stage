@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import it.unimib.convertitore_acom_fhir.Util.*;
+import it.unimib.convertitore_acom_fhir.bloodPressureObs.BloodPressureObservation;
 import it.unimib.convertitore_acom_fhir.temperatureObs.TemperatureObservation;
 
 public class Main {
@@ -26,8 +27,8 @@ public class Main {
          * arraylist
          * per aggiungere eventuali osservazioni
          */
-        JsonReader reader = new JsonReader(new FileReader(Costants.TEMPERATURE_OBS_FILE));
-        Observation[] observations = new Gson().fromJson(reader, TemperatureObservation[].class);
+        JsonReader reader = new JsonReader(new FileReader(Costants.ACOM_OBS_FILE));
+        Observation[] observations = new Gson().fromJson(reader, Observation[].class);
         List<Observation> oList = new ArrayList<>();
         for (Observation observation : observations) {
             oList.add(observation);
@@ -55,10 +56,10 @@ public class Main {
         if (observations.length != oList.size()) {
             Gson gson = new Gson();
             String json = gson.toJson(oList);
-            //System.out.println("JSON" + json);
+            // System.out.println("JSON" + json);
             PrintWriter outputFile = null;
             try {
-                outputFile = new PrintWriter(Costants.TEMPERATURE_OBS_FILE);
+                outputFile = new PrintWriter(Costants.ACOM_OBS_FILE);
                 outputFile.println(json);
             } catch (FileNotFoundException e) {
                 System.out.println("Errore nell'apertura del file temperature_obs.json");
@@ -72,6 +73,7 @@ public class Main {
     }
 
     private static Observation generateObservation(int obsType) {
+        int scelta = -1;
         Observation obs = new Observation() {
 
         };
@@ -79,7 +81,6 @@ public class Main {
             case 1: {
                 ObservationsType oType;
                 UnitCode unit;
-                int scelta = -1;
                 float temperatura;
                 System.out.println("1 - TEMPERATURE OBSERVATIONS - Scelta dei parametri");
                 System.out.println("Tipo di temperatura:");
@@ -148,13 +149,26 @@ public class Main {
                         break;
                 }
 
-                obs = new TemperatureObservation(temperatura, oType, unit, 0.1f);
+                obs = new TemperatureObservation(temperatura, oType, unit);
                 System.out.println(obs);
                 break;
             }
 
             case 2: {
+                System.out.println("2 - BLOOD PRESSURE OBSERVATIONS - scelta dei parametri");
+                System.out.println("Tipo di osservazione");
+                System.out.println("1 - Blood pressure observation");
+                System.out.println("2 - BP pulse observation");
+                System.out.println("3 - BP measurement status observation");
+                scelta = input.nextInt();
+                switch (scelta) {
+                    case 1:
+                        obs = new BloodPressureObservation();
+                        break;
 
+                    default:
+                        break;
+                }
                 break;
             }
 

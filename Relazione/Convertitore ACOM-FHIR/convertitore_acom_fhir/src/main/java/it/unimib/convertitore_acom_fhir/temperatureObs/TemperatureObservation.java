@@ -8,23 +8,14 @@ import java.util.Date;
 
 public class TemperatureObservation extends NumericObservation {
 
-    protected ObservationsType temperatureType;
-
     public TemperatureObservation() {
-        this.observationType = ObservationsType.TEMPERATURE;
-        this.timestamp = new Date();
-        this.temperatureType = ObservationsType.MDC_TEMP_BODY;
-        this.value = 36.5f;
-        this.unit = UnitCode.MDC_DIM_DEGC;
-        this.accuracy = 0.1f;
+        super(36.5f, UnitCode.MDC_DIM_DEGC,ObservationsType.MDC_TEMP_BODY);
+        setTimestamp(new Date());
     }
 
-    public TemperatureObservation(float value, ObservationsType temperatureType, UnitCode unit, float accuracy) {
-        this.observationType = ObservationsType.TEMPERATURE;
-        this.timestamp = new Date();
-        this.temperatureType = temperatureType;
-        this.value = value;
-        this.unit = unit;
-        this.accuracy = accuracy;
+    public TemperatureObservation(float value, ObservationsType type, UnitCode unit) {
+        super(value, unit,type);
+        setTimestamp(new Date());
     }
+
 }
