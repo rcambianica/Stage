@@ -14,13 +14,22 @@ import com.google.gson.stream.JsonReader;
 import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.bloodPressureObs.BPPulseRateObservation;
 import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.bloodPressureObs.BloodPressureObservation;
 import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.temperatureObs.TemperatureObservation;
-import it.unimib.convertitore_acom_fhir.Util.*;
+import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.weightScaleObs.BMIObservation;
+import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.weightScaleObs.BodyMassObservation;
+import it.unimib.convertitore_acom_fhir.Util.Costants;
+import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
+import it.unimib.convertitore_acom_fhir.Util.UnitCode;
 
 public class Main {
 
     private static Scanner input = new Scanner(System.in);
+    private static ObservationsType oType;
+    private static UnitCode unit;
+    private static float value;
+    private static String[] derivedFrom;
 
     public static void main(String[] args) throws IOException {
+
         /*
          * leggo i file di osservazioni (per ora solo quello delle osservazioni di
          * temperatura)
@@ -80,9 +89,6 @@ public class Main {
         };
         switch (obsType) {
             case 1: {
-                ObservationsType oType;
-                UnitCode unit;
-                float temperatura;
                 System.out.println("1 - TEMPERATURE OBSERVATIONS - Scelta dei parametri");
                 System.out.println("Tipo di temperatura:");
                 int cont = 1;
@@ -128,7 +134,7 @@ public class Main {
                 }
 
                 System.out.print("Valore temperatura: ");
-                temperatura = input.nextFloat();
+                value = input.nextFloat();
 
                 System.out.println("Unità di misura:");
                 System.out.println("1 - MDC_DIM_DEGC");
@@ -150,13 +156,13 @@ public class Main {
                         break;
                 }
 
-                obs = new TemperatureObservation(temperatura, oType, unit);
+                obs = new TemperatureObservation(value, oType, unit);
                 System.out.println(obs);
                 break;
             }
 
             case 2: {
-                System.out.println("2 - BLOOD PRESSURE OBSERVATIONS - scelta dei parametri");
+                System.out.println("2 - BLOOD PRESSURE OBSERVATIONS - Scelta dei parametri");
                 System.out.println("Tipo di osservazione");
                 System.out.println("1 - Blood pressure observation");
                 System.out.println("2 - BP pulse observation");
@@ -172,7 +178,6 @@ public class Main {
                         obs = new BPPulseRateObservation(value);
                         break;
                     }
-                        
 
                     default:
                         break;
@@ -192,6 +197,58 @@ public class Main {
 
             case 5: {
 
+                System.out.println("5 - WEIGHT SCALE OBSERVATIONS - scelta dei parametri");
+                System.out.println("Tipo di osservazione:");
+                System.out.println("1 - Body mass observation");
+                System.out.println("2 - Body length observation");
+                System.out.println("3 - BMI observation");
+                scelta = input.nextInt();
+                switch (scelta) {
+                    case 1: {
+                        System.out.println("Valore misurazione: ");
+                        value = input.nextFloat();
+                        System.out.println("Unità di misura:");
+                        System.out.println("1 - KG");
+                        System.out.println("2 - LB");
+                        scelta = input.nextInt();
+                        if (scelta == 1)
+                            unit = UnitCode.MDC_DIM_KILO_G;
+                        else
+                            unit = UnitCode.MDC_DIM_LB;
+                        obs = new BodyMassObservation(value, unit);
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Valore misurazione: ");
+                        value = input.nextFloat();
+                        System.out.println("Unità di misura:");
+                        System.out.println("1 - CM");
+                        System.out.println("2 - INCH");
+                        scelta = input.nextInt();
+                        if (scelta == 1)
+                            unit = UnitCode.MDC_DIM_CENTI_M;
+                        else
+                            unit = UnitCode.MDC_DIM_INCH;
+                        obs = new BodyMassObservation(value, unit);
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Valore misurazione: ");
+                        value = input.nextFloat();
+                        // in un sistema verosimile questa parte dovrebbe essere gestita in modo più
+                        // consistente, questa implementazione permette di creare un'osservazione
+                        // fittizia
+                        System.out.println("Misura derivata da: ");
+                        derivedFrom = new String[2];
+                        derivedFrom[0] = input.nextLine();
+                        derivedFrom[1] = input.nextLine();
+                        obs = new BMIObservation(derivedFrom, value);
+                        break;
+                    }
+
+                    default:
+                        break;
+                }
                 break;
             }
 

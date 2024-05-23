@@ -10,9 +10,9 @@ import it.unimib.convertitore_acom_fhir.Util.SupplementalInfo;
 public class Observation {
 
     private String id;
-    private ObservationsType derivedFrom[];
-    private ObservationsType hasMember[];
-    // private Duration measurementDuration;
+    private String derivedFrom[];
+    private String hasMember[];
+    //private Duration measurementDuration;
     private ObservationStatusCode measurementStatus;
     private final int patientId = 1234;
     private SupplementalInfo supplementalInfo[];
@@ -27,19 +27,19 @@ public class Observation {
         this.id = id;
     }
 
-    public ObservationsType[] getDerivedFrom() {
+    public String[] getDerivedFrom() {
         return derivedFrom;
     }
 
-    public void setDerivedFrom(ObservationsType[] derivedFrom) {
+    public void setDerivedFrom(String[] derivedFrom) {
         this.derivedFrom = derivedFrom;
     }
 
-    public ObservationsType[] getHasMember() {
+    public String[] getHasMember() {
         return hasMember;
     }
 
-    public void setHasMember(ObservationsType[] hasMember) {
+    public void setHasMember(String[] hasMember) {
         this.hasMember = hasMember;
     }
 

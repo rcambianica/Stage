@@ -21,12 +21,29 @@
         "type": "MDC_PULS_RATE_NON_INV"
     },
     {
-        "accuracy": 0.1,
-        "value": 40.0,
-        "unit": "MDC_DIM_DEGC",
         "id": "0532335e-935f-4309-a7fd-499284b875ae",
         "patientId": 1234,
         "timestamp": "May 22, 2024, 5:43:33 PM",
         "type": "MDC_TEMP_TYMP"
+    },
+    null,
+    {
+        "id": "ddc959a6-5685-453b-bb57-0c91f4e23f43",
+        "patientId": 1234,
+        "timestamp": "May 23, 2024, 1:54:27 PM",
+        "type": "MDC_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 11.0,
+        "unit": "MDC_DIM_KILO_G_PER_M_SQ",
+        "id": "c31b8ee0-10b7-4d3d-afcd-1cada5d97e97",
+        "derivedFrom": [
+            "",
+            "rr-esf"
+        ],
+        "patientId": 1234,
+        "timestamp": "May 23, 2024, 1:56:30 PM",
+        "type": "MDC_RATIO_MASS_BODY_LEN_SQ"
     }
 ]
