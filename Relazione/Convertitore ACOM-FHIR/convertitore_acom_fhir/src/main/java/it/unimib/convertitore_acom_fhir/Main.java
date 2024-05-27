@@ -11,11 +11,12 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.bloodPressureObs.BPPulseRateObservation;
-import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.bloodPressureObs.BloodPressureObservation;
-import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.temperatureObs.TemperatureObservation;
-import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.weightScaleObs.BMIObservation;
-import it.unimib.convertitore_acom_fhir.ACOMDeviceSpecializations.weightScaleObs.BodyMassObservation;
+import it.unimib.convertitore_acom_fhir.ACOM.ACOMObservation;
+import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.bloodPressureObs.BPPulseRateObservation;
+import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.bloodPressureObs.BloodPressureObservation;
+import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.temperatureObs.TemperatureObservation;
+import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.weightScaleObs.BMIObservation;
+import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.weightScaleObs.BodyMassObservation;
 import it.unimib.convertitore_acom_fhir.Util.Costants;
 import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
 import it.unimib.convertitore_acom_fhir.Util.UnitCode;
@@ -38,9 +39,9 @@ public class Main {
          * per aggiungere eventuali osservazioni
          */
         JsonReader reader = new JsonReader(new FileReader(Costants.ACOM_OBS_FILE));
-        Observation[] observations = new Gson().fromJson(reader, Observation[].class);
-        List<Observation> oList = new ArrayList<>();
-        for (Observation observation : observations) {
+        ACOMObservation[] observations = new Gson().fromJson(reader, ACOMObservation[].class);
+        List<ACOMObservation> oList = new ArrayList<>();
+        for (ACOMObservation observation : observations) {
             oList.add(observation);
         }
 
@@ -82,9 +83,9 @@ public class Main {
         input.close();
     }
 
-    private static Observation generateObservation(int obsType) {
+    private static ACOMObservation generateObservation(int obsType) {
         int scelta = -1;
-        Observation obs = new Observation() {
+        ACOMObservation obs = new ACOMObservation() {
 
         };
         switch (obsType) {

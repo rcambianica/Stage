@@ -1,49 +1,17 @@
 [
     {
-        "id": "81647717-b535-48e4-8019-595ab5c4041e",
+        "id": "9d9835d6-da4b-4d37-aa94-ba40f260ec10",
         "patientId": 1234,
-        "timestamp": "May 22, 2024, 5:41:09 PM",
-        "type": "MDC_TEMP_EAR"
-    },
-    {
-        "id": "4ab2704a-0aee-4d44-953e-92e1686b3e81",
-        "patientId": 1234,
-        "supplementalInfo": [
-            "MDC_UPEXT_FOREARM"
-        ],
-        "timestamp": "May 22, 2024, 5:42:39 PM",
-        "type": "MDC_PRESS_BLD_NON_INV"
-    },
-    {
-        "id": "b78d5913-6d81-4649-a11d-da9cd59ce59e",
-        "patientId": 1234,
-        "timestamp": "May 22, 2024, 5:42:46 PM",
-        "type": "MDC_PULS_RATE_NON_INV"
-    },
-    {
-        "id": "0532335e-935f-4309-a7fd-499284b875ae",
-        "patientId": 1234,
-        "timestamp": "May 22, 2024, 5:43:33 PM",
-        "type": "MDC_TEMP_TYMP"
-    },
-    null,
-    {
-        "id": "ddc959a6-5685-453b-bb57-0c91f4e23f43",
-        "patientId": 1234,
-        "timestamp": "May 23, 2024, 1:54:27 PM",
-        "type": "MDC_MASS_BODY_ACTUAL"
+        "timestamp": "2024-05-24T10:27:02Z",
+        "type": "MDC_TEMP_BODY"
     },
     {
         "accuracy": 0.1,
-        "value": 11.0,
-        "unit": "MDC_DIM_KILO_G_PER_M_SQ",
-        "id": "c31b8ee0-10b7-4d3d-afcd-1cada5d97e97",
-        "derivedFrom": [
-            "",
-            "rr-esf"
-        ],
+        "value": 40.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "41d5d59b-79cb-4460-b584-cf854dba7a13",
         "patientId": 1234,
-        "timestamp": "May 23, 2024, 1:56:30 PM",
-        "type": "MDC_RATIO_MASS_BODY_LEN_SQ"
+        "timestamp": "2024-05-24T12:29:30Z",
+        "type": "MDC_TEMP_RECT"
     }
 ]
