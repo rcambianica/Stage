@@ -1,18 +1,19 @@
 package it.unimib.convertitore_acom_fhir.FHIR;
 
+import java.util.ArrayList;
+
 import it.unimib.convertitore_acom_fhir.Util.ObservationStatusCode;
-import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
 import it.unimib.convertitore_acom_fhir.Util.SupplementalInfo;
 
 public class FHIRObservation {
 
     private final String resourceType = "Observation";
-    private ObservationsType id;
-    private final String[] meta = {"http://hl7.org/fhir/StructureDefinition/vitalsigns"};
+    private String id;
+    private final String[] meta = { "http://hl7.org/fhir/StructureDefinition/vitalsigns" };
     private Text text;
     private Identifier identifier;
     private final String status = "final";
-    private CodeableConcept category;
+    private ArrayList<CodeableConcept> category;
     private CodeableConcept code;
 
     private String effectiveDateTime;
@@ -33,11 +34,11 @@ public class FHIRObservation {
         return resourceType;
     }
 
-    public ObservationsType getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObservationsType id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -65,11 +66,11 @@ public class FHIRObservation {
         return status;
     }
 
-    public CodeableConcept getCategory() {
+    public ArrayList<CodeableConcept> getCategory() {
         return category;
     }
 
-    public void setCategory(CodeableConcept category) {
+    public void setCategory(ArrayList<CodeableConcept> category) {
         this.category = category;
     }
 
@@ -80,7 +81,6 @@ public class FHIRObservation {
     public void setCode(CodeableConcept code) {
         this.code = code;
     }
-
 
     public String getEffectiveDateTime() {
         return effectiveDateTime;
@@ -129,4 +129,5 @@ public class FHIRObservation {
     public void setComponent(SupplementalInfo[] component) {
         this.component = component;
     }
+
 }
