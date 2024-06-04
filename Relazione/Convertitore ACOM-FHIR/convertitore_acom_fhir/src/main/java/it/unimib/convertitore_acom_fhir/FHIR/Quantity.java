@@ -1,25 +1,26 @@
 package it.unimib.convertitore_acom_fhir.FHIR;
 
-public class Quantity {
+public class Quantity extends Value{
 
-    private int value;
+    private float value;
     // < | <= | >= | > | ad - how to understand the value
     private char comparator;
     private String unit;
     // System that defines coded unit form
-    private final String system = "";
+    private String system;
     // Coded form of the unit
     private String code;
 
-    public Quantity (int value)  {
+    public Quantity (float value, String system)  {
         this.value = value;
+        this.system = system;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         this.value = value;
     }
 
@@ -41,6 +42,10 @@ public class Quantity {
 
     public String getSystem() {
         return system;
+    }
+
+    public void setSystem(String system)  {
+        this.system = system;
     }
 
     public String getCode() {

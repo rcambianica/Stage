@@ -1,12 +1,14 @@
 package it.unimib.convertitore_acom_fhir.ACOM;
 
+import it.unimib.convertitore_acom_fhir.ConverterToFHIR;
+
 //import java.time.Duration;
 
 import it.unimib.convertitore_acom_fhir.Util.ObservationStatusCode;
 import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
 import it.unimib.convertitore_acom_fhir.Util.SupplementalInfo;
 
-public class ACOMObservation {
+public abstract class ACOMObservation implements ConverterToFHIR   {
 
     private String id;
     private String derivedFrom[];
@@ -86,5 +88,4 @@ public class ACOMObservation {
     public void setType(ObservationsType type) {
         this.type = type;
     }
-
 }

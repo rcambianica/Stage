@@ -12,11 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import it.unimib.convertitore_acom_fhir.ACOM.ACOMObservation;
-import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.bloodPressureObs.BPPulseRateObservation;
-import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.bloodPressureObs.BloodPressureObservation;
 import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.temperatureObs.TemperatureObservation;
-import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.weightScaleObs.BMIObservation;
-import it.unimib.convertitore_acom_fhir.ACOM.DeviceSpecializations.weightScaleObs.BodyMassObservation;
 import it.unimib.convertitore_acom_fhir.Util.Costants;
 import it.unimib.convertitore_acom_fhir.Util.ObservationsType;
 import it.unimib.convertitore_acom_fhir.Util.UnitCode;
@@ -27,7 +23,6 @@ public class Main {
     private static ObservationsType oType;
     private static UnitCode unit;
     private static float value;
-    private static String[] derivedFrom;
 
     public static void main(String[] args) throws IOException {
 
@@ -39,7 +34,7 @@ public class Main {
          * per aggiungere eventuali osservazioni
          */
         JsonReader reader = new JsonReader(new FileReader(Costants.ACOM_OBS_FILE));
-        ACOMObservation[] observations = new Gson().fromJson(reader, ACOMObservation[].class);
+        ACOMObservation[] observations = new Gson().fromJson(reader, TemperatureObservation[].class);
         List<ACOMObservation> oList = new ArrayList<>();
         for (ACOMObservation observation : observations) {
             oList.add(observation);
@@ -51,26 +46,51 @@ public class Main {
             System.out.println("- GENERATORE DI OSSERVAZIONI ACOM (IEEE 11073-10206) -");
             System.out.println("Selezionare il tipo di osservazioni che si vuole generare:");
             System.out.println("1 - Temperature Observations (IEEE 11073-10408)");
-            System.out.println("2 - Blood Pressure Observations (IEEE 11073-10407)");
-            System.out.println("3 - Glucose Meter Observations (IEEE 11073-10417)");
-            System.out.println("4 - Pulse Oximeter Observations (IEEE 11073-10404)");
-            System.out.println("5 - Weight Scale Observations (IEEE 11073-10415)");
-            System.out.println("6 - Basic ECG or Heart Rate Observations (IEEE 11073-10406)");
+            /*
+             * System.out.println("2 - Blood Pressure Observations (IEEE 11073-10407)");
+             * System.out.println("3 - Glucose Meter Observations (IEEE 11073-10417)");
+             * System.out.println("4 - Pulse Oximeter Observations (IEEE 11073-10404)");
+             * System.out.println("5 - Weight Scale Observations (IEEE 11073-10415)");
+             * System.out.
+             * println("6 - Basic ECG or Heart Rate Observations (IEEE 11073-10406)");
+             */
             System.out.println("7 - uscita");
+
             scelta = input.nextInt();
             if (scelta != 7)
                 oList.add(generateObservation(scelta));
         }
 
-        // sovrascrivo il file json solo se ho effettivamente generato nuove
+        // sovrascrivo i file json solo se ho effettivamente generato nuove
         // osservazioni
+
         if (observations.length != oList.size()) {
+            // sovrascrivo il file ACOM
             Gson gson = new Gson();
             String json = gson.toJson(oList);
-            // System.out.println("JSON" + json);
             PrintWriter outputFile = null;
             try {
                 outputFile = new PrintWriter(Costants.ACOM_OBS_FILE);
+                outputFile.println(json);
+            } catch (FileNotFoundException e) {
+                System.out.println("Errore nell'apertura del file temperature_obs.json");
+                System.exit(0);
+            }
+            outputFile.close();
+
+            //converto le osservazioni ACOM in FHIR e sovrascrivo il file FHIR
+            json = "[";
+            for (ACOMObservation temperatureObservation : oList) {
+                if (json.equals("["))
+                    json = json + temperatureObservation.converter();
+                else
+                    json = json + ',' + temperatureObservation.converter();
+
+            }
+            json = json + ']';
+            outputFile = null;
+            try {
+                outputFile = new PrintWriter(Costants.FHIR_OBS_FILE);
                 outputFile.println(json);
             } catch (FileNotFoundException e) {
                 System.out.println("Errore nell'apertura del file temperature_obs.json");
@@ -81,13 +101,12 @@ public class Main {
 
         reader.close();
         input.close();
+
     }
 
-    private static ACOMObservation generateObservation(int obsType) {
+    private static TemperatureObservation generateObservation(int obsType) {
         int scelta = -1;
-        ACOMObservation obs = new ACOMObservation() {
-
-        };
+        TemperatureObservation obs = null;
         switch (obsType) {
             case 1: {
                 System.out.println("1 - TEMPERATURE OBSERVATIONS - Scelta dei parametri");
@@ -163,94 +182,96 @@ public class Main {
             }
 
             case 2: {
-                System.out.println("2 - BLOOD PRESSURE OBSERVATIONS - Scelta dei parametri");
-                System.out.println("Tipo di osservazione");
-                System.out.println("1 - Blood pressure observation");
-                System.out.println("2 - BP pulse observation");
-                System.out.println("3 - BP measurement status observation");
-                scelta = input.nextInt();
-                switch (scelta) {
-                    case 1:
-                        obs = new BloodPressureObservation();
-                        break;
-                    case 2: {
-                        System.out.print("Numero di pulsazioni al minuto: ");
-                        float value = input.nextFloat();
-                        obs = new BPPulseRateObservation(value);
-                        break;
-                    }
-
-                    default:
-                        break;
-                }
-                break;
-            }
-
-            case 3: {
-
-                break;
-            }
-
-            case 4: {
-
-                break;
-            }
-
-            case 5: {
-
-                System.out.println("5 - WEIGHT SCALE OBSERVATIONS - scelta dei parametri");
-                System.out.println("Tipo di osservazione:");
-                System.out.println("1 - Body mass observation");
-                System.out.println("2 - Body length observation");
-                System.out.println("3 - BMI observation");
-                scelta = input.nextInt();
-                switch (scelta) {
-                    case 1: {
-                        System.out.println("Valore misurazione: ");
-                        value = input.nextFloat();
-                        System.out.println("Unità di misura:");
-                        System.out.println("1 - KG");
-                        System.out.println("2 - LB");
-                        scelta = input.nextInt();
-                        if (scelta == 1)
-                            unit = UnitCode.MDC_DIM_KILO_G;
-                        else
-                            unit = UnitCode.MDC_DIM_LB;
-                        obs = new BodyMassObservation(value, unit);
-                        break;
-                    }
-                    case 2: {
-                        System.out.println("Valore misurazione: ");
-                        value = input.nextFloat();
-                        System.out.println("Unità di misura:");
-                        System.out.println("1 - CM");
-                        System.out.println("2 - INCH");
-                        scelta = input.nextInt();
-                        if (scelta == 1)
-                            unit = UnitCode.MDC_DIM_CENTI_M;
-                        else
-                            unit = UnitCode.MDC_DIM_INCH;
-                        obs = new BodyMassObservation(value, unit);
-                        break;
-                    }
-                    case 3: {
-                        System.out.println("Valore misurazione: ");
-                        value = input.nextFloat();
-                        // in un sistema verosimile questa parte dovrebbe essere gestita in modo più
-                        // consistente, questa implementazione permette di creare un'osservazione
-                        // fittizia
-                        System.out.println("Misura derivata da: ");
-                        derivedFrom = new String[2];
-                        derivedFrom[0] = input.nextLine();
-                        derivedFrom[1] = input.nextLine();
-                        obs = new BMIObservation(derivedFrom, value);
-                        break;
-                    }
-
-                    default:
-                        break;
-                }
-                break;
+                /*
+                 * System.out.println("2 - BLOOD PRESSURE OBSERVATIONS - Scelta dei parametri");
+                 * System.out.println("Tipo di osservazione");
+                 * System.out.println("1 - Blood pressure observation");
+                 * System.out.println("2 - BP pulse observation");
+                 * System.out.println("3 - BP measurement status observation");
+                 * scelta = input.nextInt();
+                 * switch (scelta) {
+                 * case 1:
+                 * //obs = new BloodPressureObservation();
+                 * break;
+                 * case 2: {
+                 * System.out.print("Numero di pulsazioni al minuto: ");
+                 * float value = input.nextFloat();
+                 * obs = new BPPulseRateObservation(value);
+                 * break;
+                 * }
+                 * 
+                 * default:
+                 * break;
+                 * }
+                 * break;
+                 * }
+                 * 
+                 * case 3: {
+                 * 
+                 * break;
+                 * }
+                 * 
+                 * case 4: {
+                 * 
+                 * break;
+                 * }
+                 * 
+                 * case 5: {
+                 * 
+                 * System.out.println("5 - WEIGHT SCALE OBSERVATIONS - scelta dei parametri");
+                 * System.out.println("Tipo di osservazione:");
+                 * System.out.println("1 - Body mass observation");
+                 * System.out.println("2 - Body length observation");
+                 * System.out.println("3 - BMI observation");
+                 * scelta = input.nextInt();
+                 * switch (scelta) {
+                 * case 1: {
+                 * System.out.println("Valore misurazione: ");
+                 * value = input.nextFloat();
+                 * System.out.println("Unità di misura:");
+                 * System.out.println("1 - KG");
+                 * System.out.println("2 - LB");
+                 * scelta = input.nextInt();
+                 * if (scelta == 1)
+                 * unit = UnitCode.MDC_DIM_KILO_G;
+                 * else
+                 * unit = UnitCode.MDC_DIM_LB;
+                 * obs = new BodyMassObservation(value, unit);
+                 * break;
+                 * }
+                 * case 2: {
+                 * System.out.println("Valore misurazione: ");
+                 * value = input.nextFloat();
+                 * System.out.println("Unità di misura:");
+                 * System.out.println("1 - CM");
+                 * System.out.println("2 - INCH");
+                 * scelta = input.nextInt();
+                 * if (scelta == 1)
+                 * unit = UnitCode.MDC_DIM_CENTI_M;
+                 * else
+                 * unit = UnitCode.MDC_DIM_INCH;
+                 * obs = new BodyMassObservation(value, unit);
+                 * break;
+                 * }
+                 * case 3: {
+                 * System.out.println("Valore misurazione: ");
+                 * value = input.nextFloat();
+                 * // in un sistema verosimile questa parte dovrebbe essere gestita in modo più
+                 * // consistente, questa implementazione permette di creare un'osservazione
+                 * // fittizia
+                 * System.out.println("Misura derivata da: ");
+                 * derivedFrom = new String[2];
+                 * derivedFrom[0] = input.nextLine();
+                 * derivedFrom[1] = input.nextLine();
+                 * obs = new BMIObservation(derivedFrom, value);
+                 * break;
+                 * }
+                 * 
+                 * default:
+                 * break;
+                 * }
+                 * break;
+                 */
             }
 
             case 6: {

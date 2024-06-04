@@ -2,20 +2,22 @@ package it.unimib.convertitore_acom_fhir.FHIR;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.SerializedName;
+
 import it.unimib.convertitore_acom_fhir.Util.ObservationStatusCode;
 import it.unimib.convertitore_acom_fhir.Util.SupplementalInfo;
 
 public class FHIRObservation {
 
-    private final String resourceType = "Observation";
+    private String resourceType;
     private String id;
-    private final String[] meta = { "http://hl7.org/fhir/StructureDefinition/vitalsigns" };
+    private Meta meta;
     private Text text;
     private Identifier identifier;
-    private final String status = "final";
+    private String status;
     private ArrayList<CodeableConcept> category;
     private CodeableConcept code;
-
+    private Subject subject;
     private String effectiveDateTime;
     // Se lo stato di misurazione indica che la misurazione non è valida, non
     // disponibile, o che la misurazione è in corso poi il associato campo
@@ -29,6 +31,8 @@ public class FHIRObservation {
     private String derivedFrom[];
     private String hasMember[];
     private SupplementalInfo component[];
+    @SerializedName ("valueQuantity")
+    private Value value;
 
     public String getResourceType() {
         return resourceType;
@@ -42,7 +46,7 @@ public class FHIRObservation {
         this.id = id;
     }
 
-    public String[] getMeta() {
+    public Meta getMeta() {
         return meta;
     }
 
@@ -68,6 +72,11 @@ public class FHIRObservation {
 
     public ArrayList<CodeableConcept> getCategory() {
         return category;
+    }
+
+    public void setCategory(CodeableConcept category) {
+        this.category = new ArrayList<>();
+        this.category.add(category);
     }
 
     public void setCategory(ArrayList<CodeableConcept> category) {
@@ -130,4 +139,39 @@ public class FHIRObservation {
         this.component = component;
     }
 
+    public Value getValue() {
+        return value;
+    }
+
+    public void setValue(Quantity valueQuantity)    {
+        this.value = valueQuantity;
+    }
+
+    public void setResourceType(String resourceType) {
+        this.resourceType = resourceType;
+    }
+
+    public void setMeta(String profile) {
+        this.meta.setProfile(profile);
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public FHIRObservation() {
+        this.resourceType = "Observation";
+        this.meta = new Meta(null);
+        this.text = new Text(null);
+        this.status = "final";
+        this.subject = new Subject("Patient/example");
+    }
 }

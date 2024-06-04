@@ -14,4 +14,10 @@ public class CompoundObservation extends ACOMObservation {
         this.components = components;
     }
 
+    @Override
+    public String converter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'converter'");
+    }
+
 }

@@ -35,4 +35,10 @@ public class NumericObservation extends ACOMObservation {
         setType(type);
         this.accuracy = 0.1f;
     }
+    @Override
+    public String converter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'converter'");
+    }
+   
 }
