@@ -31,7 +31,7 @@ public class FHIRObservation {
     private String derivedFrom[];
     private String hasMember[];
     private SupplementalInfo component[];
-    @SerializedName ("valueQuantity")
+    @SerializedName("valueQuantity")
     private Value value;
 
     public String getResourceType() {
@@ -143,7 +143,7 @@ public class FHIRObservation {
         return value;
     }
 
-    public void setValue(Quantity valueQuantity)    {
+    public void setValue(Quantity valueQuantity) {
         this.value = valueQuantity;
     }
 
@@ -167,6 +167,8 @@ public class FHIRObservation {
         this.subject = subject;
     }
 
+    // utile per la conversione, crea un'osservazione FHIR settando le variabili non
+    // suscettibili al tipo di osservazione e inizializzando i datatypes
     public FHIRObservation() {
         this.resourceType = "Observation";
         this.meta = new Meta(null);

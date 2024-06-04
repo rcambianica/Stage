@@ -36,6 +36,8 @@ public class TemperatureObservation extends NumericObservation {
     @Override
     public String converter() {
         FHIRObservation fhirObservation = new FHIRObservation();
+        // parametri che non dipendono da valori presenti nell'osservazione ACOM, ma che
+        // possiamo settare in base al tipo di osservazione
         fhirObservation.setId("body-temperature");
         fhirObservation.setMeta("http://hl7.org/fhir/StructureDefinition/vitalsigns");
         fhirObservation.getText().setDiv(
