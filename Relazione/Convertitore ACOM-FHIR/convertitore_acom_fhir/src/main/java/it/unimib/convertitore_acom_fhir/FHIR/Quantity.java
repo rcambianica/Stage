@@ -1,6 +1,6 @@
 package it.unimib.convertitore_acom_fhir.FHIR;
 
-public class Quantity extends Value{
+public class Quantity {
 
     private float value;
     // < | <= | >= | > | ad - how to understand the value

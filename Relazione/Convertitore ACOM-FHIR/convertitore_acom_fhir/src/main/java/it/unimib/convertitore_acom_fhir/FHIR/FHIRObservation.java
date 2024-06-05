@@ -31,8 +31,8 @@ public class FHIRObservation {
     private String derivedFrom[];
     private String hasMember[];
     private SupplementalInfo component[];
-    @SerializedName("valueQuantity")
-    private Value value;
+    
+    private Quantity valueQuantity;
 
     public String getResourceType() {
         return resourceType;
@@ -139,12 +139,12 @@ public class FHIRObservation {
         this.component = component;
     }
 
-    public Value getValue() {
-        return value;
+    public Quantity getValue() {
+        return valueQuantity;
     }
 
     public void setValue(Quantity valueQuantity) {
-        this.value = valueQuantity;
+        this.valueQuantity = valueQuantity;
     }
 
     public void setResourceType(String resourceType) {
