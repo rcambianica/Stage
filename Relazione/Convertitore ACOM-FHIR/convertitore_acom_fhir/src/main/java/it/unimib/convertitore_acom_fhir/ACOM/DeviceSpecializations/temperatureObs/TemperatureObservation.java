@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class TemperatureObservation extends NumericObservation {
 
@@ -83,7 +84,7 @@ public class TemperatureObservation extends NumericObservation {
                 break;
         }
         fhirObservation.setValue(valueQuantity);
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String json = gson.toJson(fhirObservation);
         return json;
     }
