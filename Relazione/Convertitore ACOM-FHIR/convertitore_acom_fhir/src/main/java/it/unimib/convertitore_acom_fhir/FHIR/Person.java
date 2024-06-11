@@ -1,8 +1,8 @@
 package it.unimib.convertitore_acom_fhir.FHIR;
 
-public class Subject {
+public class Person {
     private String reference;
-    public Subject(String reference)    {
+    public Person(String reference)    {
         this.reference = reference;
     }
     public String getReference() {

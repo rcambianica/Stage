@@ -2,8 +2,6 @@ package it.unimib.convertitore_acom_fhir.FHIR;
 
 import java.util.ArrayList;
 
-import com.google.gson.annotations.SerializedName;
-
 import it.unimib.convertitore_acom_fhir.Util.ObservationStatusCode;
 import it.unimib.convertitore_acom_fhir.Util.SupplementalInfo;
 
@@ -17,7 +15,8 @@ public class FHIRObservation {
     private String status;
     private ArrayList<CodeableConcept> category;
     private CodeableConcept code;
-    private Subject subject;
+    private Person subject;
+    private Person encounter;
     private String effectiveDateTime;
     // Se lo stato di misurazione indica che la misurazione non è valida, non
     // disponibile, o che la misurazione è in corso poi il associato campo
@@ -159,11 +158,11 @@ public class FHIRObservation {
         this.status = status;
     }
 
-    public Subject getSubject() {
+    public Person getSubject() {
         return subject;
     }
 
-    public void setSubject(Subject subject) {
+    public void setSubject(Person subject) {
         this.subject = subject;
     }
 
@@ -174,6 +173,7 @@ public class FHIRObservation {
         this.meta = new Meta(null);
         this.text = new Text(null);
         this.status = "final";
-        this.subject = new Subject("Patient/example");
+        this.subject = new Person("Patient/example");
+        this.encounter = new Person("Encounter/example");
     }
 }

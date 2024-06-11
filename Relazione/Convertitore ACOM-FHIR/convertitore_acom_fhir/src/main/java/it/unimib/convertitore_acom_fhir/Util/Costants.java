@@ -21,6 +21,12 @@ public class Costants {
     public static final String CODE_TEMP_FAHR = "Fahr";
     public static final String CODE_TEMP_KEL = "Kel";
 
+    //  weight scale
+    public static final String CODE_WEIGHT_KILO_G = "kg";
+    public static final String CODE_WEIGHT_LBS = "[lbs_av]";
+    public static final String CODE_WEIGHT_CENTI_M = "cm";
+    public static final String CODE_WEIGHT_INCH = "inch";
+
     // display for Coding class
     public static final String DISPLAY_VITAL_SIGNS = "Vital Signs";
     public static final String DISPLAY_BLOOD_PRESSURE = "Blood Pressure";

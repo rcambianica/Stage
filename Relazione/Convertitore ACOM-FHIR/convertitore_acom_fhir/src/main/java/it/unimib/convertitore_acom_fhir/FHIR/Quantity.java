@@ -4,7 +4,7 @@ public class Quantity {
 
     private float value;
     // < | <= | >= | > | ad - how to understand the value
-    private char comparator;
+    private String comparator;
     private String unit;
     // System that defines coded unit form
     private String system;
@@ -24,11 +24,11 @@ public class Quantity {
         this.value = value;
     }
 
-    public char getComparator() {
+    public String getComparator() {
         return comparator;
     }
 
-    public void setComparator(char comparator) {
+    public void setComparator(String comparator) {
         this.comparator = comparator;
     }
 

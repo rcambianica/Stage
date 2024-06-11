@@ -51,9 +51,9 @@ public class TemperatureObservation extends NumericObservation {
         CodeableConcept category = new CodeableConcept(coding[0]);
         category.setText(Costants.DISPLAY_VITAL_SIGNS);
         fhirObservation.setCategory(category);
-        coding[1] = new Coding("http://loinc.org", "8310-5", "Body temperature");
 
         // code
+        coding[1] = new Coding("http://loinc.org", "8310-5", "Body temperature");
         CodeableConcept code = new CodeableConcept(coding[1]);
         code.setText("Body temperature");
         fhirObservation.setCode(code);
