@@ -108,4 +108,26 @@
         Riguardo la costruzione di un convertitore da ACOM a FHIR, devo chiarire se è necessario passare dalle classi Java
         del progetto analizzato. Perché l'abbiamo preso in esame? Proponeva un'implementazione di un formato astratto di rappresentazione 
         dei dati che i PHD possono generare. Ma ora il problema è che la conversione è in sostanza un semplice mapping tra gli attributi dei due formati
+        \newpage
+        Scheletro relazione
+        \begin{itemize}
+            \item abstract (spiegazione problema interoperabilità?)
+            \item IEEE 11073-10206 (ACOM)
+            \begin{itemize}
+                \item a cosa serve
+                \item funzionamento, compatibilità con fhir 
+                \item osservazioni (devo metterle tutte?)
+                \item spiegare implentazione in java (con paragrafi dedicati alle specializzazioni implementate)
+                \item esempi illustrati di un'osservazione ACOM ?
+            \end{itemize}
+            \item FHIR
+                \begin{itemize}
+                    \item a cosa serve (standard dati sanitari elettronici, interoperabilità)
+                    \item risorse, profili (struttura "logica" FHIR)
+                    \item la risorsa osservazione
+                \end{itemize}
+            \item Mapping e traduzione (converter)
+            \item conclusioni
+        \end{itemize}
+        
 \end{document}
