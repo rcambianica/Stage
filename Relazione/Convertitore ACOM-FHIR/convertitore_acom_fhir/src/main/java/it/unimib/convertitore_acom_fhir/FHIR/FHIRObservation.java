@@ -17,6 +17,7 @@ public class FHIRObservation {
     private CodeableConcept code;
     private Person subject;
     private Person encounter;
+
     private String effectiveDateTime;
     // Se lo stato di misurazione indica che la misurazione non è valida, non
     // disponibile, o che la misurazione è in corso poi il associato campo
@@ -164,6 +165,14 @@ public class FHIRObservation {
 
     public void setSubject(Person subject) {
         this.subject = subject;
+    }
+
+    public Person getEncounter() {
+        return encounter;
+    }
+
+    public void setEncounter(Person encounter) {
+        this.encounter = encounter;
     }
 
     // utile per la conversione, crea un'osservazione FHIR settando le variabili non

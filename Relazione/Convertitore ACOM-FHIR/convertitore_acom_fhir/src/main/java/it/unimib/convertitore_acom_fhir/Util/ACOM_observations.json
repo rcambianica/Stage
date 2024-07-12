@@ -1,1 +1,155 @@
-[{"accuracy":0.1,"value":36.5,"unit":"MDC_DIM_DEGC","id":"9d9835d6-da4b-4d37-aa94-ba40f260ec10","patientId":1234,"timestamp":"2024-05-24T10:27:02Z","type":"MDC_TEMP_BODY"},{"accuracy":0.1,"value":40.0,"unit":"MDC_DIM_DEGC","id":"41d5d59b-79cb-4460-b584-cf854dba7a13","patientId":1234,"timestamp":"2024-05-24T12:29:30Z","type":"MDC_TEMP_RECT"},{"accuracy":0.1,"value":444.0,"unit":"MDC_DIM_DEGC","id":"b6a02011-b558-49b1-8a75-64ace05a8fd1","patientId":1234,"timestamp":"2024-06-04T16:11:19Z","type":"MDC_TEMP_AXILLA"},{"accuracy":0.1,"value":50.0,"unit":"MDC_DIM_DEGC","id":"59fd9789-f639-4b41-aa10-e5285973cb28","patientId":1234,"timestamp":"2024-06-04T16:14:08Z","type":"MDC_TEMP_RECT"},{"accuracy":0.1,"value":33.0,"unit":"MDC_DIM_FAHR","id":"38a7477e-4545-4327-a7d4-cf797c7ef51a","patientId":1234,"timestamp":"2024-06-04T16:39:11Z","type":"MDC_TEMP_TOE"},{"accuracy":0.1,"value":36.5,"unit":"MDC_DIM_DEGC","id":"a5753bf0-581f-419f-8e91-f263d3e21375","patientId":1234,"timestamp":"2024-06-05T10:23:15Z","type":"MDC_TEMP_FINGER"},{"accuracy":0.1,"value":22.5,"unit":"MDC_DIM_DEGC","id":"aac314a9-7cdc-41a9-aa71-ff60c2afbaae","patientId":1234,"timestamp":"2024-06-05T16:10:56Z","type":"MDC_TEMP_TOE"},{"accuracy":0.1,"value":44.0,"unit":"MDC_DIM_DEGC","id":"8e86daed-fd91-45e8-a0a9-0da8aff379fb","patientId":1234,"timestamp":"2024-06-05T17:19:00Z","type":"MDC_TEMP_FINGER"},{"accuracy":0.1,"value":66.0,"unit":"MDC_DIM_KILO_G","id":"dad403fa-7716-44db-bcc7-35aea995d39a","patientId":1234,"timestamp":"2024-06-11T12:19:54Z","type":"MDC_MASS_BODY_ACTUAL"},{"accuracy":0.1,"value":66.0,"unit":"MDC_DIM_KILO_G","id":"dba42fef-d5bb-4fd6-9f62-9da75bfbf350","patientId":1234,"timestamp":"2024-06-11T12:53:11Z","type":"MDC_MASS_BODY_ACTUAL"},{"accuracy":0.1,"value":100.0,"unit":"MDC_DIM_DEGC","id":"67cb48dc-b8ad-44c4-9569-f4e19c8ddafd","patientId":1234,"timestamp":"2024-06-11T13:02:01Z","type":"MDC_TEMP_RECT"},{"accuracy":0.1,"value":66.0,"unit":"MDC_DIM_KILO_G","id":"1da94d6d-661a-4ddc-9808-e5d4ce14861b","patientId":1234,"timestamp":"2024-06-11T13:02:06Z","type":"MDC_MASS_BODY_ACTUAL"},{"accuracy":0.1,"value":100.0,"unit":"MDC_DIM_KILO_G","id":"bdb3ebc6-e3e0-468b-ab53-bcdad299c13a","patientId":1234,"timestamp":"2024-06-11T13:05:59Z","type":"MDC_MASS_BODY_ACTUAL"},{"accuracy":0.1,"value":100.0,"unit":"MDC_DIM_DEGC","id":"be6bd899-b2b5-475e-94af-529c5238dc65","patientId":1234,"timestamp":"2024-06-11T13:08:16Z","type":"MDC_TEMP_RECT"},{"accuracy":0.1,"value":22.0,"unit":"MDC_DIM_CENTI_M","id":"ebb84c35-35d5-454c-aa0b-79c560be257b","patientId":1234,"timestamp":"2024-06-11T13:48:57Z","type":"MDC_MASS_BODY_ACTUAL"},{"accuracy":0.1,"value":10.0,"unit":"MDC_DIM_CENTI_M","id":"1ee1fb5c-80c3-4be6-af2c-c773638a5663","patientId":1234,"timestamp":"2024-06-11T13:50:38Z","type":"MDC_RATIO_MASS_BODY_ACTUAL"}]
+[
+    {
+        "accuracy": 0.1,
+        "value": 36.5,
+        "unit": "MDC_DIM_DEGC",
+        "id": "9d9835d6-da4b-4d37-aa94-ba40f260ec10",
+        "patientId": 1234,
+        "timestamp": "2024-05-24T10:27:02Z",
+        "type": "MDC_TEMP_BODY"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 40.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "41d5d59b-79cb-4460-b584-cf854dba7a13",
+        "patientId": 1234,
+        "timestamp": "2024-05-24T12:29:30Z",
+        "type": "MDC_TEMP_RECT"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 444.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "b6a02011-b558-49b1-8a75-64ace05a8fd1",
+        "patientId": 1234,
+        "timestamp": "2024-06-04T16:11:19Z",
+        "type": "MDC_TEMP_AXILLA"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 50.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "59fd9789-f639-4b41-aa10-e5285973cb28",
+        "patientId": 1234,
+        "timestamp": "2024-06-04T16:14:08Z",
+        "type": "MDC_TEMP_RECT"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 33.0,
+        "unit": "MDC_DIM_FAHR",
+        "id": "38a7477e-4545-4327-a7d4-cf797c7ef51a",
+        "patientId": 1234,
+        "timestamp": "2024-06-04T16:39:11Z",
+        "type": "MDC_TEMP_TOE"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 36.5,
+        "unit": "MDC_DIM_DEGC",
+        "id": "a5753bf0-581f-419f-8e91-f263d3e21375",
+        "patientId": 1234,
+        "timestamp": "2024-06-05T10:23:15Z",
+        "type": "MDC_TEMP_FINGER"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 22.5,
+        "unit": "MDC_DIM_DEGC",
+        "id": "aac314a9-7cdc-41a9-aa71-ff60c2afbaae",
+        "patientId": 1234,
+        "timestamp": "2024-06-05T16:10:56Z",
+        "type": "MDC_TEMP_TOE"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 44.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "8e86daed-fd91-45e8-a0a9-0da8aff379fb",
+        "patientId": 1234,
+        "timestamp": "2024-06-05T17:19:00Z",
+        "type": "MDC_TEMP_FINGER"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 66.0,
+        "unit": "MDC_DIM_KILO_G",
+        "id": "dad403fa-7716-44db-bcc7-35aea995d39a",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T12:19:54Z",
+        "type": "MDC_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 66.0,
+        "unit": "MDC_DIM_KILO_G",
+        "id": "dba42fef-d5bb-4fd6-9f62-9da75bfbf350",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T12:53:11Z",
+        "type": "MDC_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 100.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "67cb48dc-b8ad-44c4-9569-f4e19c8ddafd",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T13:02:01Z",
+        "type": "MDC_TEMP_RECT"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 66.0,
+        "unit": "MDC_DIM_KILO_G",
+        "id": "1da94d6d-661a-4ddc-9808-e5d4ce14861b",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T13:02:06Z",
+        "type": "MDC_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 100.0,
+        "unit": "MDC_DIM_KILO_G",
+        "id": "bdb3ebc6-e3e0-468b-ab53-bcdad299c13a",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T13:05:59Z",
+        "type": "MDC_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 100.0,
+        "unit": "MDC_DIM_DEGC",
+        "id": "be6bd899-b2b5-475e-94af-529c5238dc65",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T13:08:16Z",
+        "type": "MDC_TEMP_RECT"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 22.0,
+        "unit": "MDC_DIM_CENTI_M",
+        "id": "ebb84c35-35d5-454c-aa0b-79c560be257b",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T13:48:57Z",
+        "type": "MDC_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 10.0,
+        "unit": "MDC_DIM_CENTI_M",
+        "id": "1ee1fb5c-80c3-4be6-af2c-c773638a5663",
+        "patientId": 1234,
+        "timestamp": "2024-06-11T13:50:38Z",
+        "type": "MDC_RATIO_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 175.0,
+        "unit": "MDC_DIM_CENTI_M",
+        "id": "a2f8d3fc-416c-4f2c-a75a-885e47e34531",
+        "patientId": 1234,
+        "timestamp": "2024-07-10T11:57:29Z",
+        "type": "MDC_RATIO_MASS_BODY_ACTUAL"
+    }
+]
