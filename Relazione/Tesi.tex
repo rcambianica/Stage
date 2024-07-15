@@ -28,7 +28,9 @@
 \addbibresource{bibliography.bib}
 \nocite{*}
 \fancyhf{}
-
+\addto\captionsitalian{%
+  \renewcommand{\lstlistingname}{Listato}%
+  \renewcommand\lstlistlistingname{Listati}}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -205,12 +207,13 @@ Per aiutare un consumatore a trovare l'insieme corretto di rapporti per un caso 
 \end{itemize}
 
 \subsubsection*{Esempio istanza di una risorsa}
-Di seguito è fornito un esempio di come un paziente viene rappresentato tramite un oggetto FHIR in formato JSON.
+Nella figura~\ref{fig:esempioPaziente} è fornito un esempio di come un paziente viene rappresentato tramite un oggetto FHIR in formato JSON.
 \'E possibile notare la presenza delle features descritte in precedenza.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1 \textwidth]{figures/esempio paziente.png}
     \label{fig:esempioPaziente}
+    \caption{Esempio risorsa Paziente FHIR}
 \end{figure}
 \subsubsection{Risorsa Osservazione}
 Le osservazioni sono un elemento fondamentale nel mondo sanitario, utili per supportare diagnosi di malattie, monitare progressi
@@ -251,8 +254,8 @@ Un'osservazione che rispetta il profilo appena descritto deve quindi avere:
 \end{itemize}
 Approfondendo il formato dei valori, è importante specificare che quando un valore di risultato è rappresentato come un concetto predefinito utilizzando un codice, viene utilizzato il datatype valueCodeableConcept.
 Questo elemento è vincolato a un set di valori composto da una nomenclatura standard come SNOMED CT o da valori di risultato codificati di un sistema sorgente ("locale").
-I risultati possono essere codificati in più set di valori basati su diversi sistemi di codici e questi possono essere mappati utilizzando la risorsa ConceptMap e/o forniti come codifiche aggiuntive direttamente nell'elemento, come mostrato nell'esempio seguente.
-\begin{lstlisting}
+I risultati possono essere codificati in più set di valori basati su diversi sistemi di codici e questi possono essere mappati utilizzando la risorsa ConceptMap e/o forniti come codifiche aggiuntive direttamente nell'elemento, come mostrato nel listato~\ref{lst:vcc}.
+\begin{lstlisting}[caption={Esempio risorsa ConceptMap}, label={lst:vcc}]
             "valueCodeableConcept": {
                 "coding": [
                     {
@@ -269,7 +272,7 @@ I risultati possono essere codificati in più set di valori basati su diversi si
             }
         \end{lstlisting}
 \subsubsection{Esempio osservazione FHIR}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Esempio osservazione FHIR}]
     {
         "resourceType": "Observation",
         "id": "body-temperature",
@@ -393,6 +396,12 @@ Seguendo le direttive dello standard ACOM, si è ritenuto utile per il progetto 
 Questi attributi permettono una rappresentazione dettagliata e standardizzata delle osservazioni provenienti da dispositivi di salute personali, facilitando l'integrazione e l'interoperabilità dei dati nei sistemi sanitari.
 ACOMObservation implementa l'interfaccia \textit{ConverterToFHIR}, parte fondamentale di questo progetto; si è scelto di implementare quest'interfaccia nella classe base per poi andare ad effettuare l'override nelle classi che modellano le specializzazioni approfondite.
 Vengono introdotte ora le classi che estendono ACOMObservation presenti nel progetto.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm, height=20cm]{figures/ACOM.png}
+    \caption{Classi presenti nel package ACOM}
+    \label{fig:Acom}
+\end{figure}
 \subsubsection{NumericObservation}
 La classe NumericObservation modella un'osservazione numerica, ad esempio un'osservazione di temperatura o di peso. 
 \begin{figure}[H]
@@ -415,8 +424,8 @@ Classe che modella l'osservazione della temperatura corporea compiuta da un term
 Estende la classe NumericObservation, senza però aggiungere attributi, poiché possiede la stessa struttura. Sviluppa dunque due costruttori, uno senza parametri utile per i primi test e simulazioni ed uno che accetta i tre parametri fondamentali di NumericObservation: value, unit e type; entrambi utilizzano il costruttore della classe padre per settare gli attributi ereditati.
 Si è scelto di gestire in modo automatico la creazione altri parametri, come timestamp, per emulare lo scambio di informazioni che avviene tra il sistema che gestisce l'orologio ed il generatore di osservazioni di un vero PHD.
 TemperatureObservation effettua l'override dell'interfaccia \textit{ConverterToFHIR}, ereditata dalla classe antenata ACOMObservation; la sua implementazione verrà presentata nel dettaglio nel paragrafo~\ref{subsubsec:ConverterToFHIR}.
-\subsubsection*{Esempio TemperatureObservation in formato JSON}
-\begin{lstlisting}
+Viene fornito ora nel listato~\ref{lst:to} un esempio di un'istanza della classe TemperatureObservation.
+\begin{lstlisting}[caption={Esempio istanza di TemperatureObservation},label={lst:to}]
     {
         "accuracy": 0.1,
         "value": 36.5,
@@ -433,8 +442,8 @@ Estende la classe NumericObservation, senza però aggiungere attributi, poiché 
 Sviluppa un costruttore che accetta i tre parametri fondamentali di NumericObservation: value, unit e type; utilizza il costruttore della classe padre per settare gli attributi ereditati.
 Si è scelto di gestire in modo automatico la creazione altri parametri, come timestamp, per emulare lo scambio di informazioni che avviene tra il sistema che gestisce l'orologio ed il generatore di osservazioni di un vero PHD.
 BodyMassObservation effettua l'override dell'interfaccia \textit{ConverterToFHIR}, ereditata dalla classe antenata ACOMObservation; la sua implementazione verrà presentata nel dettaglio nel paragrafo~\ref{subsubsec:ConverterToFHIR}.
-\subsubsection*{Esempio BodyMassObservation in formato JSON}
-\begin{lstlisting}
+Viene fornito ora nel listato~\ref{lst:bmo} un esempio di un'istanza della classe BodyMassObservation.
+\begin{lstlisting}[caption={Esempio istanza di BodyMassObservation},label={lst:bmo}]
     {
         "accuracy": 0.1,
         "value": 66.0,
@@ -451,8 +460,8 @@ Estende la classe NumericObservation, senza però aggiungere attributi, poiché 
 Sviluppa un costruttore che accetta i tre parametri fondamentali di NumericObservation: value, unit e type; utilizza il costruttore della classe padre per settare gli attributi ereditati.
 Si è scelto di gestire in modo automatico la creazione altri parametri, come timestamp, per emulare lo scambio di informazioni che avviene tra il sistema che gestisce l'orologio ed il generatore di osservazioni di un vero PHD.
 BodyLengthObservation effettua l'override dell'interfaccia \textit{ConverterToFHIR}, ereditata dalla classe antenata ACOMObservation; la sua implementazione verrà presentata nel dettaglio nel paragrafo~\ref{subsubsec:ConverterToFHIR}.
-\subsubsection*{Esempio BodyLengthObservation in formato JSON}
-\begin{lstlisting}
+Viene fornito ora nel listato~\ref{lst:blo} un esempio di un'istanza della classe BodyLengthObservation.
+\begin{lstlisting}[caption={Esempio istanza di BodyLengthObservation},label={lst:blo}]
     {
         "accuracy": 0.1,
         "value": 66.0,
@@ -470,16 +479,20 @@ Estende la classe NumericObservation, senza però aggiungere attributi, poiché 
 Sviluppa un costruttore che accetta i tre parametri fondamentali di NumericObservation: value, unit e type; utilizza il costruttore della classe padre per settare gli attributi ereditati.
 Si è scelto di gestire in modo automatico la creazione altri parametri, come timestamp, per emulare lo scambio di informazioni che avviene tra il sistema che gestisce l'orologio ed il generatore di osservazioni di un vero PHD.
 BodyLengthObservation effettua l'override dell'interfaccia \textit{ConverterToFHIR}, ereditata dalla classe antenata ACOMObservation; la sua implementazione verrà presentata nel dettaglio nel paragrafo~\ref{subsubsec:ConverterToFHIR}.
-\subsubsection*{Esempio BodyLengthObservation in formato JSON}
-\begin{lstlisting}
+Viene fornito ora nel listato~\ref{lst:bmio} un esempio di un'istanza della classe BMIObservation.
+\begin{lstlisting}[caption={Esempio istanza di BMIObservation},label={lst:bmio}]
     {
         "accuracy": 0.1,
-        "value": 175.0,
-        "unit": "MDC_DIM_CENTI_M",
-        "id": "a2f8d3fc-416c-4f2c-a75a-885e47e34531",
+        "value": 35.0,
+        "unit": "MDC_DIM_KILO_G_PER_M_SQ",
+        "id": "5e17639c-893c-4766-9afd-7275aa6e6f05",
+        "derivedFrom": [
+            "1ee1fb5c-80c3-4be6-af2c-c773638a5663",
+            "a2f8d3fc-416c-4f2c-a75a-885e47e34531"
+        ],
         "patientId": 1234,
-        "timestamp": "2024-07-10T11:57:29Z",
-        "type": "MDC_RATIO_MASS_BODY_ACTUAL"
+        "timestamp": "2024-07-12T18:21:34Z",
+        "type": "MDC_RATIO_MASS_BODY_LEN_SQ"
     }
 \end{lstlisting}
 \subsection{Package FHIR}
@@ -529,6 +542,12 @@ La classe FHIRObservation contiene dunque i seguenti attributi:
         \item \textbf{component}, modellato dall'enumerazione SupplementalInfo, presentata nel paragrafo~\ref{subsec:PackageUtil}. Contiene i codici di eventuali componenti aggiuntive dell'osservazione in esame
     \end{itemize}
 \end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/FHIR.png}
+    \caption{Classi presenti nel package FHIR}
+    \label{fig:fhir}
+\end{figure}
 \subsection{Interfaccia ConverterToFHIR}\label{subsubsec:ConverterToFHIR}
 L'interfaccia ConverterToFHIR sfrutta la struttura delle osservazioni che il formato di partenza IEEE 11073-10206 ACOM produce, poiché sono state implementate appositamente per permettere il mapping degli attributi con il formato d'arrivo FHIR.
 Si è scelto dunque di creare una semplice interfaccia, ConverterToFHIR, formata da un unico metodo (ma idealmente espansibile con altri) chiamato converter e di implementarlo nella classe base ACOMObservation, presentata nel paragrafo~\ref{subsubsec: ACOMObs}; di conseguenza tutte le classi derivate avranno la loro interfaccia, permettendo di sviluppare converter dedicati per ogni specifica.
@@ -539,19 +558,16 @@ Gli attributi vengono poi divisi in due categorie essenziali: attributi che dipe
 Come è possibile riscontrare dal codice presente nei prossimi paragrafi, vengono prima mappati gli attributi che appartengono alla prima categoria, in seguito gli attributi che appartengono alla seconda.
 \subsubsection*{Implementazione nella classe TemperatureObservation}
 \begin{lstlisting}[language= Java, caption = Metodo converter per la classe TemperatureObservation]
-    // genera osservazioni come da esempio
     // https://hl7.org/fhir/observation-example-body-temperature.json.html
     @Override
     public String converter() {
         FHIRObservation fhirObservation = new FHIRObservation();
-        // parametri che non dipendono da valori presenti nell'osservazione ACOM, ma che
-        // possiamo settare in base al tipo di osservazione
+        // parametri che non dipendono da valori presenti nell'osservazione ACOM, ma che possiamo settare in base al tipo di osservazione
         fhirObservation.setId("body-temperature");
         fhirObservation.setMeta("http://hl7.org/fhir/StructureDefinition/vitalsigns");
         fhirObservation.getText().setDiv(
                 "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Observation</b><a name=\"body-temperature\">");
         Coding[] coding = new Coding[2];
-
         // category
         coding[0] = new Coding("http://terminology.hl7.org/CodeSystem/observation-category",
                 Costants.CODE_VITAL_SIGNS, Costants.DISPLAY_VITAL_SIGNS);
@@ -564,10 +580,8 @@ Come è possibile riscontrare dal codice presente nei prossimi paragrafi, vengon
         CodeableConcept code = new CodeableConcept(coding[1]);
         code.setText("Body temperature");
         fhirObservation.setCode(code);
-
         // effectiveDateTime
         fhirObservation.setEffectiveDateTime(this.getTimestamp());
-
         // value
         Quantity valueQuantity = new Quantity(this.getValue(), "http://unitsofmeasure.org");
         switch (this.getUnit()) {
@@ -576,17 +590,14 @@ Come è possibile riscontrare dal codice presente nei prossimi paragrafi, vengon
                 valueQuantity.setCode(Costants.CODE_TEMP_CEL);
                 break;
             }
-
             case MDC_DIM_FAHR:
                 valueQuantity.setUnit("F");
                 valueQuantity.setCode(Costants.CODE_TEMP_FAHR);
                 break;
-
             case MDC_DIM_KELVIN:
                 valueQuantity.setUnit("K");
                 valueQuantity.setCode(Costants.CODE_TEMP_KEL);
                 break;
-
             default:
                 break;
         }

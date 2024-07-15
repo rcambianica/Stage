@@ -151,5 +151,18 @@
         "patientId": 1234,
         "timestamp": "2024-07-10T11:57:29Z",
         "type": "MDC_RATIO_MASS_BODY_ACTUAL"
+    },
+    {
+        "accuracy": 0.1,
+        "value": 35.0,
+        "unit": "MDC_DIM_KILO_G_PER_M_SQ",
+        "id": "5e17639c-893c-4766-9afd-7275aa6e6f05",
+        "derivedFrom": [
+            "1ee1fb5c-80c3-4be6-af2c-c773638a5663",
+            "a2f8d3fc-416c-4f2c-a75a-885e47e34531"
+        ],
+        "patientId": 1234,
+        "timestamp": "2024-07-12T18:21:34Z",
+        "type": "MDC_RATIO_MASS_BODY_LEN_SQ"
     }
 ]
