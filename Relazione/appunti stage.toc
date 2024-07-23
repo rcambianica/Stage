@@ -1,0 +1,19 @@
+\contentsline {section}{\numberline {1}Appunti vari}{2}{}%
+\contentsline {section}{\numberline {2}Studio delle classi tradotte (package generichealthservice)}{2}{}%
+\contentsline {subsection}{\numberline {2.1}Observation e classi connesse}{2}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}Observation}{2}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}ObservationType}{2}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}ObservationValueType}{2}{}%
+\contentsline {subsubsection}{\numberline {2.1.4}SimpleNumericObservation}{3}{}%
+\contentsline {subsubsection}{\numberline {2.1.5}SimpleStringObservation}{3}{}%
+\contentsline {subsubsection}{\numberline {2.1.6}SimpleDiscreteObservation}{3}{}%
+\contentsline {subsubsection}{\numberline {2.1.7}SampleArrayObservations}{3}{}%
+\contentsline {subsubsection}{\numberline {2.1.8}CompoundNumericObservation}{3}{}%
+\contentsline {subsubsection}{\numberline {2.1.9}BundledObservation}{4}{}%
+\contentsline {subsection}{\numberline {2.2}SimpleNumericValue}{4}{}%
+\contentsline {subsection}{\numberline {2.3}CompoundDiscreetEventObservation}{4}{}%
+\contentsline {subsection}{\numberline {2.4}BluetoothValueFormatType}{4}{}%
+\contentsline {subsection}{\numberline {2.5}TLValue}{4}{}%
+\contentsline {subsection}{\numberline {2.6}TLVObservation}{4}{}%
+\contentsline {subsection}{\numberline {2.7}UnitCode}{5}{}%
+\contentsline {section}{\numberline {3}Considerazioni sull'analisi delle classi}{5}{}%
